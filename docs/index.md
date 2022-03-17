@@ -11,6 +11,7 @@ A service of the bwForCluster NEMO.
 This guide is only for users of the University of Freiburg who have bwCloud images in the Freiburg region and want to migrate them to the new bwCloud.
 
 Follow these steps:
+
 1. First install [`python-openstackclient`](https://pypi.org/project/python-openstackclient/) CLI, e.g:
 ```bash
 pip install python-openstackclient --user
@@ -60,7 +61,7 @@ $ openstack image list --shared | grep 7fd1037e-b9fa-464b-9704-0dd60461d83a
 ```
 7. Use the snapshot ID for your download:
 ```bash
-$ glance image-download 3e51e17a-c04d-345a-8712-a13f3b8fb99b --file myimage.img
+$ glance image-download 3e51e17a-c04d-345a-8712-a13f3b8fb99b --file myimage.img --progress
 ```
 8. Once your image is downloaded, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images":
 ![Create new image.](img/image-upload.png)
@@ -77,6 +78,9 @@ This is not covered in this guide.
 ### Upload Image through CLI
 
 If uploading via the graphical user interface does not work for some reason, you can try it via the command line interface.
+First, perform steps 1-6 from the top instructions.
+
+Then, follow these steps:
 
 1. Login to bwCloud: [https://portal.bw-cloud.org/identity/application_credentials/](https://portal.bw-cloud.org/identity/application_credentials/).
 Select "Identity -> Application Secrets".
@@ -90,5 +94,40 @@ source app-cred-CLI-openrc.sh
 ```
 5. Create/Upload image to new bwCloud:
 ```bash
-openstack image create --file myimage.img --private myimage
+openstack image create --file myimage.img --private myimage --progress
+```
+
+### Migrate Volumes
+
+This is highly experimental and untested yet.
+First, perform steps 1-4 from the top instructions.
+
+Then, follow these steps:
+
+1. Run `openstack volume list`.
+You should see your volumes or the volumes from your group project.
+Copy the ID of the volume you want to download, e.g. `da832458-2b9a-144b-2904-0dd604d261da`.
+2. Create a new image from this volume:
+```bash
+$ openstack image create --volume da832458-2b9a-144b-2904-0dd604d261da --force newimagename
+```
+If you have errors running this command, see Troubleshooting for a solution.
+3. Check if the volume image is already created.
+```bash
+$ openstack image list | grep newimagename
+| 93da1233-bfee-453b-9c1d-59aa45da20c7 | newimagename                                                      | active |
+```
+4. Use the new image ID for your download:
+```bash
+$ glance image-download 93da1233-bfee-453b-9c1d-59aa45da20c7 --file myvolume.img --progress
+```
+
+### Troubleshooting
+
+If you get an error while running step 2 in the guide "Migrate Volumes", you can try to downgrade your tools.
+This version numbers worked after some trial and error:
+
+```bash
+$ pip install python-openstackclient==3.18 --user
+$ pip install python-cinderclient==5 --user
 ```
