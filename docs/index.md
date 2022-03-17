@@ -73,3 +73,22 @@ Select visibility **Private**!
 ![Configure and upload new image.](img/image-config.png)
 10. You can start a new instance with this image.
 Many other OpenStack settings have to be re-configured, like "security groups".
+
+### Upload Image through CLI
+
+If for some reason GUI upload does not work, you can try the CLI.
+
+1. Login to bwCloud: [https://portal.bw-cloud.org/identity/application_credentials/](https://portal.bw-cloud.org/identity/application_credentials/).
+Select "Identity -> Application Secrets".
+![Generate Application Key.](img/api-key.png)
+2. Select a name and set a strong secret.
+![Configure Application Key.](img/api-key-conf.png)
+3. Download `openrc` file.
+4. Open a new bash window and source the credentials:
+```bash
+source app-cred-CLI-openrc.sh
+```
+5. Create/Upload image to new bwCloud:
+```bash
+openstack image create --file myimage.img --private myimage
+```
