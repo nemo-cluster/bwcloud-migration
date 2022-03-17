@@ -1,25 +1,24 @@
 # How to migrate your old bwCloud Freiburg images to the new bwCloud
 
-A service from bwForCluster NEMO.
+A service of the bwForCluster NEMO.
 
 !!! attention "DISCLAIMER"
     This in an unofficial migration guide.
-    We do not guarantee for defective images or if the instructions do not work as described.
+    We do not guarantee for broken images or if the guide does not work as described.
 
 ## Community Migration Guide
 
 This guide is only for users of the University of Freiburg who have bwCloud images in the Freiburg region and want to migrate them to the new bwCloud.
 
 Follow these steps:
-
 1. First install [`python-openstackclient`](https://pypi.org/project/python-openstackclient/) CLI, e.g:
 ```bash
 pip install python-openstackclient --user
 ```
-Some distributions provide packages, you can check first.
-Windows users could try to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install) or Linux in VirtualBox, etc.
+Some distributions provide packages that you can check first.
+Windows users might try to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install) or install Linux in VirtualBox, etc.
 2. Create a credentials file for the old bwCloud instance, e.g.: `bwcloud-old-creds.sh`
-Copy the contents of the following code window and replace `<RZ_ID>` with your University ID, e.g. you use for myLogin or [myAccount](https://myaccount.uni-freiburg.de).
+Copy the contents of the following code window and replace `<RZ_ID>` with your university ID, e.g. the one you use for myLogin or [myAccount](https://myaccount.uni-freiburg.de).
 Change your project name if necessary.
 ```bash
 #!/usr/bin/env bash
@@ -42,10 +41,10 @@ if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
 export OS_INTERFACE=public
 export OS_IDENTITY_API_VERSION=3
 ```
-3. Open a shell like `bash` or if you use a different shell start `bash`.
+3. Open a shell like `bash` or if you use another shell, start `bash`.
 4. Source your old bwCloud credentials.
-You will be prompted for your old bwCloud password.
-If you don't remember it, bwCloud support will need to generate you one.
+You will be prompted to enter your old bwCloud password.
+If you do not remember it, bwCloud support will have to generate a new one for you.
 ```bash
 $ source bwcloud-old-creds.sh
 Please enter your OpenStack Password for project Projekt_<RZ_ID>@uni-freiburg.de as user <RZ_ID>@uni-freiburg.de: 
@@ -53,8 +52,8 @@ Please enter your OpenStack Password for project Projekt_<RZ_ID>@uni-freiburg.de
 5. Run `openstack server list`.
 You should see your images or the images from your group project.
 Copy the ID of the image you want to download, e.g. `7fd1037e-b9fa-464b-9704-0dd60461d83a`.
-6. There should be a snapshot of this image you can download.
-To check that, use this ID to get the ID of the snapshot:
+6. Check if there is a snapshot for this image that you can download.
+To check this, use this ID to get the ID of the snapshot:
 ```bash
 $ openstack image list --shared | grep 7fd1037e-b9fa-464b-9704-0dd60461d83a
 | 3e51e17a-c04d-345a-8712-a13f3b8fb99b | 7fd1037e-b9fa-464b-9704-0dd60461d83a-snapshot-2022-03-11-19-40-06 | active |
@@ -65,18 +64,19 @@ $ glance image-download 3e51e17a-c04d-345a-8712-a13f3b8fb99b --file myimage.img
 ```
 8. Once your image is downloaded, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images":
 ![Create new image.](img/image-upload.png)
-9. Configure and uplaod your image.
-Minimum settings for disk and RAM are optional.
-Select visibility **Private**!
+9. Configure your image and upload it.
+The minimum settings for hard disk and RAM are optional.
+Select the visibility **Private**!
 !!! attention
-    If you don't select visibility "Private" others can use your image as base image for their services.
+    If you don't choose the visibility "Private", others can use your image as base image for their services.
 ![Configure and upload new image.](img/image-config.png)
 10. You can start a new instance with this image.
-Many other OpenStack settings have to be re-configured, like "security groups".
+Many other OpenStack settings need to be reconfigured, e.g. "Security Groups".
+This is not covered in this guide.
 
 ### Upload Image through CLI
 
-If for some reason GUI upload does not work, you can try the CLI.
+If uploading via the graphical user interface does not work for some reason, you can try it via the command line interface.
 
 1. Login to bwCloud: [https://portal.bw-cloud.org/identity/application_credentials/](https://portal.bw-cloud.org/identity/application_credentials/).
 Select "Identity -> Application Secrets".
