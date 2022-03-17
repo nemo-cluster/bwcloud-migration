@@ -1,0 +1,118 @@
+# Project information
+site_name: How to migrate your old bwCloud Freiburg images to the new bwCloud
+site_url: https://bwcloud.nemo.uni-freiburg.de
+site_author: HPC Team Freiburg
+site_description: >-
+  How to migrate your old bwCloud Freiburg images to the new bwCloud
+# Repository
+repo_url: https://github.com/nemo-cluster/bwcloud-migration
+edit_uri: tree/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2022 eScience, RZ, Uni Freiburg
+
+# Configuration
+theme:
+  name: material
+  custom_dir: custom
+
+  # Static files
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: de
+  features:
+    # - navigation.expand
+    # - navigation.indexes
+    # - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    # - toc.integrate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
+  favicon: img/nemo-favicon.png
+  logo: img/nemo-logo.svg
+    
+
+# Plugins
+plugins:
+  - extra-sass
+  - git-revision-date-localized
+  - macros
+  - search:
+      lang:
+        - en
+        - de
+
+# Customization
+extra:
+  homepage: https://www.nemo.uni-freiburg.de
+  social:
+    - icon: nemo-logo
+      link: https://www.nemo.uni-freiburg.de
+    - icon: fontawesome/brands/github
+      link: https://github.com/nemo-cluster
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/nemo_cluster
+    - icon: uni-logo
+      link: https://www.uni-freiburg.de
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  # - toc:
+  #     permalink: true
+  #     permalink: ⚓︎
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Page tree
+nav:
+  - Home: index.md
