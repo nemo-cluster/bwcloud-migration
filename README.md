@@ -5,4 +5,4 @@ We do not guarantee for defective images or if the instructions do not work as d
 
 ## Contribution
 
-Please fork repo and create pull requests with your changes.
+Please fork repository and create a pull requests with your changes.
