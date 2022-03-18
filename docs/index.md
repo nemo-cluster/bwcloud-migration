@@ -116,7 +116,7 @@ Check the size of the image with this ID:
 ```bash
 openstack image show --human-readable 991346f0-7780-19f3-34b1-c854c45105da
 ```
-Unfortunately, the sizes are displayed in different units, so `openstack image show` shows the size in GB, but GiB is used when creating.
+Unfortunately, the sizes are displayed in different units, so `openstack image show` shows the size in GB, but GiB is used when creating (e.g. 12.9GB ~ 12GiB).
 Now use the image ID to create a volume:
 ```bash
 openstack volume create --image 991346f0-7780-19f3-34b1-c854c45105da --size 12 myvolume # change size
