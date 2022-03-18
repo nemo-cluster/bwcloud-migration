@@ -75,28 +75,6 @@ Select the visibility **Private**!
 Many other OpenStack settings need to be reconfigured, e.g. "Security Groups".
 This is not covered in this guide.
 
-### Upload Image through CLI
-
-If uploading via the graphical user interface does not work for some reason, you can try it via the command line interface.
-First, perform steps 1-6 from the top instructions.
-
-Then, follow these steps:
-
-1. Login to bwCloud: [https://portal.bw-cloud.org/identity/application_credentials/](https://portal.bw-cloud.org/identity/application_credentials/).
-Select "Identity -> Application Secrets".
-![Generate Application Key.](img/api-key.png)
-2. Select a name and set a strong secret.
-![Configure Application Key.](img/api-key-conf.png)
-3. Download `openrc` file.
-4. Open a new bash window and source the credentials:
-```bash
-source app-cred-CLI-openrc.sh
-```
-5. Create/Upload image to new bwCloud:
-```bash
-openstack image create --file myimage.img --private myimage --progress
-```
-
 ### Migrate Volumes
 
 This is highly experimental and untested yet.
@@ -121,6 +99,48 @@ $ openstack image list | grep newimagename
 ```bash
 $ glance image-download 93da1233-bfee-453b-9c1d-59aa45da20c7 --file myvolume.img --progress
 ```
+5. Upload your image to OpenStack (see top instructions or "Upload Image through CLI").
+6. Once your image is uploaded, you can create a volume from it.
+Eiter do this in the GUI or use the CLI for it.
+For GUI, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images".
+Select "Create Volume" from the menu.
+![Create new volume.](img/volume-create.png)
+For the CLI, first set up your credentials.
+First, perform steps 1-4 from the "Uploading an Image via CLI" guide.
+Then, check the ID of your image with `openstack image list`.
+Check the size of the image with this ID:
+```bash
+openstack image show --human-readable 991346f0-7780-19f3-34b1-c854c45105da
+```
+There is probably a problem with the sizes, so that show displays GB, but GiB must be specified when creating.
+For example, show displays 12.9G, but you must use 12 (GiB) when creating the volume.
+Now use the image ID to create a volume:
+```bash
+openstack volume create --image 991346f0-7780-19f3-34b1-c854c45105da --size 12 myvolume # change size
+```
+
+### Upload Image through CLI
+
+If uploading via the graphical user interface does not work for some reason, you can try it via the command line interface.
+First, perform steps 1-6 from the top instructions.
+
+Then, follow these steps:
+
+1. Login to bwCloud: [https://portal.bw-cloud.org/identity/application_credentials/](https://portal.bw-cloud.org/identity/application_credentials/).
+Select "Identity -> Application Secrets".
+![Generate Application Key.](img/api-key.png)
+2. Select a name and set a strong secret.
+![Configure Application Key.](img/api-key-conf.png)
+3. Download `openrc` file.
+4. Open a new bash window and source the credentials:
+```bash
+source app-cred-CLI-openrc.sh
+```
+5. Create/Upload image to new bwCloud:
+```bash
+openstack image create --file myimage.img --private myimage
+```
+Check status with `openstack image list`.
 
 ### Troubleshooting
 
