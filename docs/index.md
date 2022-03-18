@@ -59,6 +59,10 @@ To check this, use this ID to get the ID of the snapshot:
 $ openstack image list --shared | grep 7fd1037e-b9fa-464b-9704-0dd60461d83a
 | 3e51e17a-c04d-345a-8712-a13f3b8fb99b | 7fd1037e-b9fa-464b-9704-0dd60461d83a-snapshot-2022-03-11-19-40-06 | active |
 ```
+If there is no snapshot you can generate one yourself:
+```bash
+$ openstack server image create --name 7fd1037e-b9fa-464b-9704-0dd60461d83a-snapshot-$(date -I) 7fd1037e-b9fa-464b-9704-0dd60461d83a
+```
 7. Use the snapshot ID for your download:
 ```bash
 $ glance image-download 3e51e17a-c04d-345a-8712-a13f3b8fb99b --file myimage.img --progress
@@ -99,21 +103,20 @@ $ openstack image list | grep newimagename
 ```bash
 $ glance image-download 93da1233-bfee-453b-9c1d-59aa45da20c7 --file myvolume.img --progress
 ```
-5. Upload your image to OpenStack (see top instructions or "Upload Image through CLI").
+5. Upload your image to OpenStack (see instructions above or "Upload image via CLI").
 6. Once your image is uploaded, you can create a volume from it.
-Eiter do this in the GUI or use the CLI for it.
-For GUI, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images".
+Do this either in the GUI or use the CLI.
+For the GUI, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images".
 Select "Create Volume" from the menu.
 ![Create new volume.](img/volume-create.png)
-For the CLI, first set up your credentials.
-First, perform steps 1-4 from the "Uploading an Image via CLI" guide.
-Then, check the ID of your image with `openstack image list`.
+For the CLI, you must first set up your credentials.
+To do this, follow steps 1-4 from the "Uploading an image via CLI" guide.
+Then check the ID of your image with `openstack image list`.
 Check the size of the image with this ID:
 ```bash
 openstack image show --human-readable 991346f0-7780-19f3-34b1-c854c45105da
 ```
-There is probably a problem with the sizes, so that show displays GB, but GiB must be specified when creating.
-For example, show displays 12.9G, but you must use 12 (GiB) when creating the volume.
+Unfortunately, the sizes are displayed in different units, so `openstack image show` shows the size in GB, but GiB is used when creating.
 Now use the image ID to create a volume:
 ```bash
 openstack volume create --image 991346f0-7780-19f3-34b1-c854c45105da --size 12 myvolume # change size
