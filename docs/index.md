@@ -154,3 +154,9 @@ This version numbers worked after some trial and error:
 $ pip install python-openstackclient==3.18 --user
 $ pip install python-cinderclient==5 --user
 ```
+
+If you want to use the current version of python-openstackclient (`pip install python-openstackclient --user --upgrade` to install the latest version again), you can also patch it locally (until https://storyboard.openstack.org/#!/story/2009287 is fixed):
+
+```
+$ sed -Ei "/kwargs.get\\('visibility'|protected=True/s/^/#/" ~/.local/lib/python*/site-packages/openstackclient/image/v2/image.py
+```
