@@ -8,13 +8,17 @@ A service of the bwForCluster NEMO.
 
 ## Community Migration Guide
 
-This guide is only for users of the University of Freiburg who have bwCloud images in the Freiburg region and want to migrate them to the new bwCloud.
+This guide is only for users of the University of Freiburg who have bwCloud images in the old Freiburg region and want to migrate them to the new bwCloud.
+
+### First Configuration Steps
+
+First you need to instal the command line interface tools and set up credentials for the old bwCloud.
 
 Follow these steps:
 
 1. First install [`python-openstackclient`](https://pypi.org/project/python-openstackclient/) CLI, e.g:
 ```bash
-pip install python-openstackclient --user
+$ pip install python-openstackclient --user
 ```
 Some distributions provide packages that you can check first.
 Windows users might try to use [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install) or install Linux in VirtualBox, etc.
@@ -42,18 +46,23 @@ if [ -z "$OS_REGION_NAME" ]; then unset OS_REGION_NAME; fi
 export OS_INTERFACE=public
 export OS_IDENTITY_API_VERSION=3
 ```
-3. Open a shell like `bash` or if you use another shell, start `bash`.
-4. Source your old bwCloud credentials.
+
+### Migrate Images
+
+To migrate images, please follow these steps:
+
+1. Open a shell like `bash` or if you use a inkompatible shell like fish, start `bash`.
+2. Source your old bwCloud credentials.
 You will be prompted to enter your old bwCloud password.
 If you do not remember it, bwCloud support will have to generate a new one for you.
 ```bash
 $ source bwcloud-old-creds.sh
 Please enter your OpenStack Password for project Projekt_<RZ_ID>@uni-freiburg.de as user <RZ_ID>@uni-freiburg.de: 
 ```
-5. Run `openstack server list`.
+3. Run `openstack server list`.
 You should see your images or the images from your group project.
 Copy the ID of the image you want to download, e.g. `7fd1037e-b9fa-464b-9704-0dd60461d83a`.
-6. Check if there is a snapshot for this image that you can download.
+4. Check if there is a snapshot for this image that you can download.
 To check this, use this ID to get the ID of the snapshot:
 ```bash
 $ openstack image list --shared | grep 7fd1037e-b9fa-464b-9704-0dd60461d83a
@@ -63,69 +72,75 @@ If there is no snapshot you can generate one yourself:
 ```bash
 $ openstack server image create --name 7fd1037e-b9fa-464b-9704-0dd60461d83a-snapshot-$(date -I) 7fd1037e-b9fa-464b-9704-0dd60461d83a
 ```
-7. Use the snapshot ID for your download:
+5. Use the snapshot ID for your download:
 ```bash
 $ glance image-download 3e51e17a-c04d-345a-8712-a13f3b8fb99b --file myimage.img --progress
 ```
-8. Once your image is downloaded, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images":
+6. Once your image is downloaded, visit https://portal.bw-cloud.org/project/images and select "Compute -> Images":
 ![Create new image.](img/image-upload.png)
-9. Configure your image and upload it.
+If you want to use the CLI, go to section [Upload Image through CLI](#upload-image-through-cli).
+7. Configure your image and upload it.
 The minimum settings for hard disk and RAM are optional.
 Select the visibility **Private**!
 !!! attention
     If you don't choose the visibility "Private", others can use your image as base image for their services.
 ![Configure and upload new image.](img/image-config.png)
-10. You can start a new instance with this image.
+8. You can start a new instance with this image.
 Many other OpenStack settings need to be reconfigured, e.g. "Security Groups".
 This is not covered in this guide.
 
 ### Migrate Volumes
 
-This is highly experimental and untested yet.
-First, perform steps 1-4 from the top instructions.
+To migrate volumes, please follow these steps:
 
-Then, follow these steps:
-
-1. Run `openstack volume list`.
+1. Open a shell like `bash` or if you use a inkompatible shell like fish, start `bash`.
+2. Source your old bwCloud credentials.
+You will be prompted to enter your old bwCloud password.
+If you do not remember it, bwCloud support will have to generate a new one for you.
+```bash
+$ source bwcloud-old-creds.sh
+Please enter your OpenStack Password for project Projekt_<RZ_ID>@uni-freiburg.de as user <RZ_ID>@uni-freiburg.de: 
+```
+3. Run `openstack volume list`.
 You should see your volumes or the volumes from your group project.
 Copy the ID of the volume you want to download, e.g. `da832458-2b9a-144b-2904-0dd604d261da`.
-2. Create a new image from this volume:
+4. Create a new image from this volume:
 ```bash
 $ openstack image create --volume da832458-2b9a-144b-2904-0dd604d261da --force newimagename
 ```
 If you have errors running this command, see Troubleshooting for a solution.
-3. Check if the volume image is already created.
+5. Check if the volume image is already created.
 ```bash
 $ openstack image list | grep newimagename
 | 93da1233-bfee-453b-9c1d-59aa45da20c7 | newimagename                                                      | active |
 ```
-4. Use the new image ID for your download:
+6. Use the new image ID for your download:
 ```bash
 $ glance image-download 93da1233-bfee-453b-9c1d-59aa45da20c7 --file myvolume.img --progress
 ```
-5. Upload your image to OpenStack (see instructions above or "Upload image via CLI").
-6. Once your image is uploaded, you can create a volume from it.
+7. Upload your image to OpenStack (see steps 6-8 in section [Migrate Images](#migrate-images) or [Upload Image through CLI](#upload-image-through-cli).
+8. Once your image is uploaded, you can create a volume from it.
 Do this either in the GUI or use the CLI.
-For the GUI, visit [https://portal.bw-cloud.org/project/images](https://portal.bw-cloud.org/project/images) and select "Compute -> Images".
+For the GUI, visit https://portal.bw-cloud.org/project/images and select "Compute -> Images".
 Select "Create Volume" from the menu.
 ![Create new volume.](img/volume-create.png)
 For the CLI, you must first set up your credentials.
-To do this, follow steps 1-4 from the "Uploading an image via CLI" guide.
+To do this, follow steps 1-4 from the section [Upload Image through CLI](#upload-image-through-cli).
 Then check the ID of your image with `openstack image list`.
-Check the size of the image with this ID:
+Next, check the size of this image:
 ```bash
-openstack image show --human-readable 991346f0-7780-19f3-34b1-c854c45105da
+$ openstack image show --human-readable 991346f0-7780-19f3-34b1-c854c45105da
 ```
 Unfortunately, the sizes are displayed in different units, so `openstack image show` shows the size in GB, but GiB is used when creating (e.g. 12.9GB ~ 12GiB).
 Now use the image ID to create a volume:
 ```bash
-openstack volume create --image 991346f0-7780-19f3-34b1-c854c45105da --size 12 myvolume # change size
+$ openstack volume create --image 991346f0-7780-19f3-34b1-c854c45105da --size 12 myvolume # change size
 ```
 
 ### Upload Image through CLI
 
 If uploading via the graphical user interface does not work for some reason, you can try it via the command line interface.
-First, perform steps 1-6 from the top instructions.
+First, perform steps 1-5 in section [Migrate Images](#migrate-images) or steps 1-6 in section [Migrate Volumes](#migrate-volumes).
 
 Then, follow these steps:
 
@@ -137,26 +152,36 @@ Select "Identity -> Application Secrets".
 3. Download `openrc` file.
 4. Open a new bash window and source the credentials:
 ```bash
-source app-cred-CLI-openrc.sh
+$ source app-cred-CLI-openrc.sh
 ```
 5. Create/Upload image to new bwCloud:
 ```bash
-openstack image create --file myimage.img --private myimage
+$ openstack image create --file myimage.img --private myimage
 ```
 Check status with `openstack image list`.
 
 ### Troubleshooting
 
 If you get an error while running step 2 in the guide "Migrate Volumes", you can try to downgrade your tools.
-This version numbers worked after some trial and error:
+One error which is pretty common is this:
+```python
+TypeError: upload_to_image() got an unexpected keyword argument 'visibility'
+```
 
+This version numbers worked after some trial and error:
 ```bash
 $ pip install python-openstackclient==3.18 --user
 $ pip install python-cinderclient==5 --user
 ```
 
-If you want to use the current version of python-openstackclient (`pip install python-openstackclient --user --upgrade` to install the latest version again), you can also patch it locally (until https://storyboard.openstack.org/#!/story/2009287 is fixed):
-
+To update your tools back to the current version, run:
+```bash
+$ pip install python-openstackclient python-cinderclient --user --upgrade
 ```
+
+You can also patch the tool locally:[^1]
+```bash
 $ sed -Ei "/kwargs.get\\('visibility'|protected=True/s/^/#/" ~/.local/lib/python*/site-packages/openstackclient/image/v2/image.py
 ```
+
+[^1]: See https://storyboard.openstack.org/#!/story/2009287 for problem description, visited 18.03.2022.
