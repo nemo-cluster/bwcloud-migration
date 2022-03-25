@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="How to migrate your old bwCloud Freiburg images to the new bwCloud" name="description"/>
+<meta content="HPC Team Freiburg" name="author"/>
+<link href="https://bwcloud.nemo.uni-freiburg.de/" rel="canonical"/>
+<link href="img/nemo-favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.3, mkdocs-material-8.2.7" name="generator"/>
+<title>How to migrate your old bwCloud Freiburg images to the new bwCloud</title>
+<link href="assets/stylesheets/main.9d5733d3.min.css" rel="stylesheet"/>
+<link href="assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="assets/stylesheets/extra-style.h_0u723r.min.css" rel="stylesheet"/></head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#how-to-migrate-your-old-bwcloud-freiburg-images-to-the-new-bwcloud">
+          Zum Inhalt
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="How to migrate your old bwCloud Freiburg images to the new bwCloud" class="md-header__button md-logo" data-md-component="logo" href="https://www.nemo.uni-freiburg.de" title="How to migrate your old bwCloud Freiburg images to the new bwCloud">
+<img alt="logo" src="img/nemo-logo.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            How to migrate your old bwCloud Freiburg images to the new bwCloud
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="red" data-md-color-media="" data-md-color-primary="red" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Suche" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Suche" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<nav aria-label="Suche" class="md-search__options">
+<button aria-label="Zurücksetzen" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nemo-cluster/bwcloud-migration/" title="Quellcode">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href=".">
+      Home
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="How to migrate your old bwCloud Freiburg images to the new bwCloud" class="md-nav__button md-logo" data-md-component="logo" href="https://www.nemo.uni-freiburg.de" title="How to migrate your old bwCloud Freiburg images to the new bwCloud">
+<img alt="logo" src="img/nemo-logo.svg"/>
+</a>
+    How to migrate your old bwCloud Freiburg images to the new bwCloud
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nemo-cluster/bwcloud-migration/" title="Quellcode">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href=".">
+        Home
+      </a>
+<nav aria-label="Inhaltsverzeichnis" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#community-migration-guide">
+    Community Migration Guide
+  </a>
+<nav aria-label="Community Migration Guide" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#first-configuration-steps">
+    First Configuration Steps
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#migrate-images">
+    Migrate Images
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#migrate-volumes">
+    Migrate Volumes
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#upload-image-through-cli">
+    Upload Image through CLI
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#troubleshooting">
+    Troubleshooting
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Inhaltsverzeichnis" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#community-migration-guide">
+    Community Migration Guide
+  </a>
+<nav aria-label="Community Migration Guide" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#first-configuration-steps">
+    First Configuration Steps
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#migrate-images">
+    Migrate Images
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#migrate-volumes">
+    Migrate Volumes
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#upload-image-through-cli">
+    Upload Image through CLI
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#troubleshooting">
+    Troubleshooting
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/nemo-cluster/bwcloud-migration/tree/main/docs/index.md" title="Seite editieren">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="how-to-migrate-your-old-bwcloud-freiburg-images-to-the-new-bwcloud">How to migrate your old bwCloud Freiburg images to the new bwCloud</h1>
+<p>A service of the bwForCluster NEMO.</p>
+<div class="admonition attention">
+<p class="admonition-title">DISCLAIMER</p>
+<p>This in an unofficial migration guide.
+We do not guarantee for broken images or if the guide does not work as described.</p>
+</div>
+<h2 id="community-migration-guide">Community Migration Guide</h2>
+<p>This guide is only for users of the University of Freiburg who have bwCloud images in the old Freiburg region and want to migrate them to the new bwCloud.
+If you want to contribute, fork the repository and create a pull request with your changes.</p>
+<h3 id="first-configuration-steps">First Configuration Steps</h3>
+<p>First you need to instal the command line interface tools and set up credentials for the old bwCloud.</p>
+<p>Follow these steps:</p>
+<ol>
+<li>First install <a href="https://pypi.org/project/python-openstackclient/"><code>python-openstackclient</code></a> CLI, e.g:
+<div class="highlight"><pre><span></span><code>$ pip install python-openstackclient --user
+</code></pre></div>
+Some distributions provide packages that you can check first.
+Windows users might try to use <a href="https://docs.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux</a> or install Linux in VirtualBox, etc.</li>
+<li>Create a credentials file for the old bwCloud instance, e.g.: <code>bwcloud-old-creds.sh</code>
+Copy the contents of the following code window and replace <code>&lt;RZ_ID&gt;</code> with your university ID, e.g. the one you use for myLogin or <a href="https://myaccount.uni-freiburg.de">myAccount</a>.
+Change your project name if necessary.
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">export</span> <span class="nv">OS_AUTH_URL</span><span class="o">=</span>https://idm01.bw-cloud.org:5000/v3
+<span class="nb">export</span> <span class="nv">OS_USERNAME</span><span class="o">=</span><span class="s2">"&lt;RZ_ID&gt;@uni-freiburg.de"</span>
+<span class="c1"># change to old group project if necessary, e.g. freiburg_mygroup</span>
+<span class="nb">export</span> <span class="nv">OS_PROJECT_NAME</span><span class="o">=</span><span class="s2">"Projekt_</span><span class="nv">$OS_USERNAME</span><span class="s2">"</span>
+<span class="nb">unset</span> OS_PROJECT_ID
+<span class="nb">export</span> <span class="nv">OS_USER_DOMAIN_NAME</span><span class="o">=</span><span class="s2">"Default"</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="nv">$OS_USER_DOMAIN_NAME</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">unset</span> OS_USER_DOMAIN_NAME<span class="p">;</span> <span class="k">fi</span>
+<span class="nb">export</span> <span class="nv">OS_PROJECT_DOMAIN_ID</span><span class="o">=</span><span class="s2">"default"</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="nv">$OS_PROJECT_DOMAIN_ID</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">unset</span> OS_PROJECT_DOMAIN_ID<span class="p">;</span> <span class="k">fi</span>
+<span class="nb">unset</span> OS_TENANT_ID
+<span class="nb">unset</span> OS_TENANT_NAME
+<span class="nb">echo</span> <span class="s2">"Please enter your OpenStack Password for project </span><span class="nv">$OS_PROJECT_NAME</span><span class="s2"> as user </span><span class="nv">$OS_USERNAME</span><span class="s2">: "</span>
+<span class="nb">read</span> -sr OS_PASSWORD_INPUT
+<span class="nb">export</span> <span class="nv">OS_PASSWORD</span><span class="o">=</span><span class="nv">$OS_PASSWORD_INPUT</span>
+<span class="nb">export</span> <span class="nv">OS_REGION_NAME</span><span class="o">=</span><span class="s2">"Freiburg"</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="nv">$OS_REGION_NAME</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nb">unset</span> OS_REGION_NAME<span class="p">;</span> <span class="k">fi</span>
+<span class="nb">export</span> <span class="nv">OS_INTERFACE</span><span class="o">=</span>public
+<span class="nb">export</span> <span class="nv">OS_IDENTITY_API_VERSION</span><span class="o">=</span><span class="m">3</span>
+</code></pre></div></li>
+</ol>
+<h3 id="migrate-images">Migrate Images</h3>
+<p>To migrate images, please follow these steps:</p>
+<ol>
+<li>Open a shell like <code>bash</code> or if you use a inkompatible shell like fish, start <code>bash</code>.</li>
+<li>Source your old bwCloud credentials.
+You will be prompted to enter your old bwCloud password.
+If you do not remember it, bwCloud support will have to generate a new one for you.
+<div class="highlight"><pre><span></span><code>$ <span class="nb">source</span> bwcloud-old-creds.sh
+Please enter your OpenStack Password <span class="k">for</span> project Projekt_&lt;RZ_ID&gt;@uni-freiburg.de as user &lt;RZ_ID&gt;@uni-freiburg.de: 
+</code></pre></div></li>
+<li>Run <code>openstack server list</code>.
+You should see your images or the images from your group project.
+Copy the ID of the image you want to download, e.g. <code>7fd1037e-b9fa-464b-9704-0dd60461d83a</code>.</li>
+<li>Check if there is a snapshot for this image that you can download.
+To check this, use this ID to get the ID of the snapshot:
+<div class="highlight"><pre><span></span><code>$ openstack image list --shared <span class="p">|</span> grep 7fd1037e-b9fa-464b-9704-0dd60461d83a
+<span class="p">|</span> 3e51e17a-c04d-345a-8712-a13f3b8fb99b <span class="p">|</span> 7fd1037e-b9fa-464b-9704-0dd60461d83a-snapshot-2022-03-11-19-40-06 <span class="p">|</span> active <span class="p">|</span>
+</code></pre></div>
+If there is no snapshot you can generate one yourself:
+<div class="highlight"><pre><span></span><code>$ openstack server image create --name 7fd1037e-b9fa-464b-9704-0dd60461d83a-snapshot-<span class="k">$(</span>date -I<span class="k">)</span> 7fd1037e-b9fa-464b-9704-0dd60461d83a
+</code></pre></div></li>
+<li>Use the snapshot ID for your download:
+<div class="highlight"><pre><span></span><code>$ glance image-download 3e51e17a-c04d-345a-8712-a13f3b8fb99b --file myimage.img --progress
+</code></pre></div></li>
+<li>Once your image is downloaded, visit <a href="https://portal.bw-cloud.org/project/images">https://portal.bw-cloud.org/project/images</a> and select "Compute -&gt; Images":
+<img alt="Create new image." src="img/image-upload.png">
+If you want to use the CLI, go to section <a href="#upload-image-through-cli">Upload Image through CLI</a>.</img></li>
+<li>Configure your image and upload it.
+The minimum settings for hard disk and RAM are optional.
+Select the visibility <strong>Private</strong>!</li>
+</ol>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If you don't choose the visibility "Private", others can use your image as base image for their services.</p>
+</div>
+<p><img alt="Configure and upload new image." src="img/image-config.png">
+8. You can start a new instance with this image.
+Many other OpenStack settings need to be reconfigured, e.g. "Security Groups".
+This is not covered in this guide.</img></p>
+<h3 id="migrate-volumes">Migrate Volumes</h3>
+<p>To migrate volumes, please follow these steps:</p>
+<ol>
+<li>Open a shell like <code>bash</code> or if you use a inkompatible shell like fish, start <code>bash</code>.</li>
+<li>Source your old bwCloud credentials.
+You will be prompted to enter your old bwCloud password.
+If you do not remember it, bwCloud support will have to generate a new one for you.
+<div class="highlight"><pre><span></span><code>$ <span class="nb">source</span> bwcloud-old-creds.sh
+Please enter your OpenStack Password <span class="k">for</span> project Projekt_&lt;RZ_ID&gt;@uni-freiburg.de as user &lt;RZ_ID&gt;@uni-freiburg.de: 
+</code></pre></div></li>
+<li>Run <code>openstack volume list</code>.
+You should see your volumes or the volumes from your group project.
+Copy the ID of the volume you want to download, e.g. <code>da832458-2b9a-144b-2904-0dd604d261da</code>.</li>
+<li>Create a new image from this volume:
+<div class="highlight"><pre><span></span><code>$ openstack image create --volume da832458-2b9a-144b-2904-0dd604d261da --force newimagename
+</code></pre></div>
+If you have errors running this command, see Troubleshooting for a solution.</li>
+<li>Check if the volume image is already created.
+<div class="highlight"><pre><span></span><code>$ openstack image list <span class="p">|</span> grep newimagename
+<span class="p">|</span> 93da1233-bfee-453b-9c1d-59aa45da20c7 <span class="p">|</span> newimagename                                                      <span class="p">|</span> active <span class="p">|</span>
+</code></pre></div></li>
+<li>Use the new image ID for your download:
+<div class="highlight"><pre><span></span><code>$ glance image-download 93da1233-bfee-453b-9c1d-59aa45da20c7 --file myvolume.img --progress
+</code></pre></div></li>
+<li>Upload your image to OpenStack (see steps 6-8 in section <a href="#migrate-images">Migrate Images</a> or <a href="#upload-image-through-cli">Upload Image through CLI</a>.</li>
+<li>Once your image is uploaded, you can create a volume from it.
+Do this either in the GUI or use the CLI.
+For the GUI, visit <a href="https://portal.bw-cloud.org/project/images">https://portal.bw-cloud.org/project/images</a> and select "Compute -&gt; Images".
+Select "Create Volume" from the menu.
+<img alt="Create new volume." src="img/volume-create.png"/>
+For the CLI, you must first set up your credentials.
+To do this, follow steps 1-4 from the section <a href="#upload-image-through-cli">Upload Image through CLI</a>.
+Then check the ID of your image with <code>openstack image list</code>.
+Next, check the size of this image:
+<div class="highlight"><pre><span></span><code>$ openstack image show --human-readable 991346f0-7780-19f3-34b1-c854c45105da
+</code></pre></div>
+Unfortunately, the sizes are displayed in different units, so <code>openstack image show</code> shows the size in GB, but GiB is used when creating (e.g. 12.9GB ~ 12GiB).
+Now use the image ID to create a volume:
+<div class="highlight"><pre><span></span><code>$ openstack volume create --image 991346f0-7780-19f3-34b1-c854c45105da --size <span class="m">12</span> myvolume <span class="c1"># change size</span>
+</code></pre></div></li>
+</ol>
+<h3 id="upload-image-through-cli">Upload Image through CLI</h3>
+<p>If uploading via the graphical user interface does not work for some reason, you can try it via the command line interface.
+First, perform steps 1-5 in section <a href="#migrate-images">Migrate Images</a> or steps 1-6 in section <a href="#migrate-volumes">Migrate Volumes</a>.</p>
+<p>Then, follow these steps:</p>
+<ol>
+<li>Login to bwCloud: <a href="https://portal.bw-cloud.org/identity/application_credentials/">https://portal.bw-cloud.org/identity/application_credentials/</a>.
+Select "Identity -&gt; Application Secrets".
+<img alt="Generate Application Key." src="img/api-key.png"/></li>
+<li>Select a name and set a strong secret.
+<img alt="Configure Application Key." src="img/api-key-conf.png"/></li>
+<li>Download <code>openrc</code> file.</li>
+<li>Open a new bash window and source the credentials:
+<div class="highlight"><pre><span></span><code>$ <span class="nb">source</span> app-cred-CLI-openrc.sh
+</code></pre></div></li>
+<li>Create/Upload image to new bwCloud:
+<div class="highlight"><pre><span></span><code>$ openstack image create --file myimage.img --private myimage
+</code></pre></div>
+Check status with <code>openstack image list</code>.</li>
+</ol>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you get an error while running step 2 in the guide "Migrate Volumes", you can try to downgrade your tools.
+One error which is pretty common is this:
+<div class="highlight"><pre><span></span><code><span class="ne">TypeError</span><span class="p">:</span> <span class="n">upload_to_image</span><span class="p">()</span> <span class="n">got</span> <span class="n">an</span> <span class="n">unexpected</span> <span class="n">keyword</span> <span class="n">argument</span> <span class="s1">'visibility'</span>
+</code></pre></div></p>
+<p>This version numbers worked after some trial and error:
+<div class="highlight"><pre><span></span><code>$ pip install python-openstackclient<span class="o">==</span><span class="m">3</span>.18 --user
+$ pip install python-cinderclient<span class="o">==</span><span class="m">5</span> --user
+</code></pre></div></p>
+<p>To update your tools back to the current version, run:
+<div class="highlight"><pre><span></span><code>$ pip install python-openstackclient python-cinderclient --user --upgrade
+</code></pre></div></p>
+<p>You can also patch the tool locally:<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>
+<div class="highlight"><pre><span></span><code>$ sed -Ei <span class="s2">"/kwargs.get\\('visibility'|protected=True/s/^/#/"</span> ~/.local/lib/python*/site-packages/openstackclient/image/v2/image.py
+</code></pre></div></p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>See <a href="https://storyboard.openstack.org/#!/story/2009287">https://storyboard.openstack.org/#!/story/2009287</a> for problem description, visited 18.03.2022. <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+<hr/>
+<div class="md-source-file">
+<small>
+    
+      Letztes Update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 25, 2022</span>
+</small>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon" data-md-component="top" data-md-state="hidden" href="#">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path></svg>
+            Zurück zum Seitenanfang
+          </a>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 eScience, RZ, Uni Freiburg
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://www.nemo.uni-freiburg.de" rel="noopener" target="_blank" title="www.nemo.uni-freiburg.de">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg data-name="Ebene 3" height="192.88841" id="Ebene_3" inkscape:version="1.0.2 (e86c870879, 2021-01-15)" sodipodi:docname="nemo-gold.svg" version="1.1" viewbox="0 0 341.3623 192.88841" width="341.3623" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg">
+<metadata id="metadata13">
+<rdf:rdf>
+<cc:work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
+</cc:work>
+</rdf:rdf>
+</metadata>
+<defs id="defs11"></defs>
+<sodipodi:namedview bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview9" inkscape:current-layer="Ebene_3" inkscape:cx="93.479834" inkscape:cy="97.088167" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="1115" inkscape:window-maximized="0" inkscape:window-width="2081" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="2.675" objecttolerance="10" pagecolor="#ffffff" showgrid="false"></sodipodi:namedview>
+<title id="title2">nemo_3.0</title>
+<path d="m 52.456096,30.728167 c 28.47,21 67.390004,18.7 98.620004,5.72 9.52,-4 18.27,-9.23 27.55,-13.67 17.66,-8.45 36.8,-12.09 56.33,-11.7 45.5,0.9 109.88,28.22 106.26,83.16 -3.62,54.940003 -72.7,85.140003 -119.54,94.350003 -57,11.23 -121,0.13 -171.180004,-29.38 -31,-18.24 -55.0000002,-47 -49.78000025,-85.470003 a 79,79 0 0 1 38.15000025,-57.05 c 18.99,-11.2599997 52.81,-20.5099997 73.900004,-15.0999997 -43.910004,0.36 -94.530004,14.9999997 -105.4600042,63.6999997 -6.29,28 5.7000002,55.000003 27.6000002,72.110003 39.37,30.76 98.000004,37.75 146.410004,33.44 35.26,-3.13 70.4,-13.28 101,-30.34 23.18,-12.91 48.86,-34.38 43.5,-64.250003 -7.29,-40.65 -57.3,-63 -94.36,-56.77 -30.16,5.08 -54.78,23.59 -83.68,32 a 114.7,114.7 0 0 1 -42,4.55 91.24,91.24 0 0 1 -30.470004,-7.94 c -6.4,-3.03 -21.89,-10.59 -22.85,-17.36 z m 8.85,37.43 h -20.31 v 57.840003 h 17.21 l -0.11,-19.24 c 0,-3.74 -0.43,-11.120003 -0.75,-15.930003 h 0.21 a 95.65,95.65 0 0 0 7.7,13.900003 l 14,21.27 h 20.21 V 68.158167 h -17.32 l 0.21,19.24 c 0,3.74 0.43,11.12 0.75,15.930003 h -0.21 a 105.64,105.64 0 0 0 -7.7,-13.900003 z M 158.0561,112.95817 h -26.2 v -9.94 h 21.6 V 90.078167 h -21.6 v -8.87 h 25.66 v -13 h -44.84 v 57.840003 h 45.33 v -13 z m 63.71,13 h 17.53 V 68.158167 h -23.52 l -11.33,27.37 h -0.21 l -11.45,-27.37 h -23.62 v 57.840003 h 17.31 l -0.11,-24.05 c 0,-4.000003 -0.54,-12.000003 -0.86,-15.610003 h 0.21 a 106.74,106.74 0 0 0 4.6,13.58 l 7.06,15.930003 h 13.36 l 7.06,-15.930003 a 106.69,106.69 0 0 0 4.6,-13.58 h 0.21 c -0.32,3.63 -0.75,11.65 -0.75,15.610003 z m 67.91,-13.54 h -39.1 v 13.58 h 39.1 z m 0,-25.550003 c 0,6.63 -1.92,11.44 -4.92,14.330003 -3.53,3.31 -8.66,4.49 -14.65,4.49 -5.99,0 -11.23,-1.18 -14.65,-4.49 -3.1,-2.890003 -4.92,-7.700003 -4.92,-14.330003 0,-6.63 1.82,-11.33 4.92,-14.22 3.42,-3.31 8.66,-4.49 14.65,-4.49 5.99,0 11.12,1.18 14.65,4.49 3.03,2.89 4.92,7.59 4.92,14.22 z m -14.65,0 c 0,-4.49 -0.43,-6.95 -1.6,-8.23 a 4.43,4.43 0 0 0 -3.31,-1.28 4.68,4.68 0 0 0 -3.44,1.23 c -1.18,1.28 -1.6,3.74 -1.6,8.23 0,4.49 0.43,7.06 1.6,8.34 a 4.68,4.68 0 0 0 3.42,1.28 4.43,4.43 0 0 0 3.31,-1.28 c 1.27,-1.24 1.66,-3.91 1.66,-8.29 z" id="path6" style="fill:#ffffff;fill-opacity:1"></path>
+</svg>
+</a>
+<a class="md-social__link" href="https://github.com/nemo-cluster" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+<a class="md-social__link" href="https://t.me/nemo_cluster" rel="noopener" target="_blank" title="t.me">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8zm114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.452 10.452 0 0 1 3.53 6.716 43.765 43.765 0 0 1 .417 9.769z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.uni-freiburg.de" rel="noopener" target="_blank" title="www.uni-freiburg.de">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="136pt" version="1.1" viewbox="0 0 96 136" width="96pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<clippath id="clip1">
+<path d="M 49 0.300781 L 71 0.300781 L 71 136 L 49 136 Z M 49 0.300781 "></path>
+</clippath>
+<clippath id="clip2">
+<path d="M 75 80 L 95.199219 80 L 95.199219 87 L 75 87 Z M 75 80 "></path>
+</clippath>
+</defs>
+<g id="surface1">
+<g clip-path="url(#clip1)" clip-rule="nonzero">
+<path d="M 53.96875 123.421875 L 50.089844 123.421875 L 50.089844 135.519531 L 70.0625 135.519531 L 70.0625 130.566406 L 62.109375 130.566406 L 62.109375 123.808594 L 58.308594 123.808594 L 58.308594 130.566406 L 53.96875 130.566406 Z M 70.0625 104.402344 L 63.609375 108.820312 C 62.765625 109.394531 61.957031 109.933594 61.417969 110.316406 C 60.726562 107.4375 58.808594 105.476562 55.734375 105.476562 C 51.855469 105.476562 49.972656 108.398438 49.972656 113.3125 C 49.972656 115.847656 50.011719 118.882812 50.089844 120.496094 L 70.0625 120.496094 L 70.0625 115.542969 L 62.265625 115.542969 L 62.265625 115.347656 L 70.0625 110.433594 Z M 56.234375 110.742188 C 57.886719 110.742188 59 111.96875 59 113.890625 C 59 114.429688 59 115.042969 58.921875 115.542969 L 53.816406 115.542969 C 53.777344 115.082031 53.738281 114.582031 53.738281 114.042969 C 53.738281 112.007812 54.660156 110.742188 56.234375 110.742188 M 70.0625 89.757812 L 66.105469 89.757812 L 66.105469 97.09375 L 61.726562 97.09375 L 61.726562 90.101562 L 57.964844 90.101562 L 57.964844 97.09375 L 53.96875 97.09375 L 53.96875 89.757812 L 50.089844 89.757812 L 50.089844 102.046875 L 70.0625 102.046875 Z M 70.136719 81 L 50.015625 81 L 50.015625 86.171875 L 70.136719 86.171875 Z M 63.839844 60.992188 C 61.691406 60.992188 60 62.105469 59.386719 64.332031 L 59.34375 64.332031 C 58.578125 62.335938 56.886719 61.261719 54.96875 61.261719 C 51.820312 61.261719 49.972656 63.449219 49.972656 68.828125 C 49.972656 71.476562 50.089844 74.742188 50.089844 76.777344 L 70.0625 76.777344 C 70.0625 73.703125 70.140625 71.09375 70.140625 69.632812 C 70.140625 63.066406 66.835938 60.992188 63.839844 60.992188 M 55.699219 66.523438 C 57.425781 66.523438 58.273438 68.097656 58.273438 70.441406 C 58.273438 70.710938 58.273438 71.285156 58.230469 71.859375 L 53.46875 71.859375 C 53.46875 71.207031 53.429688 70.402344 53.429688 69.785156 C 53.429688 67.289062 54.351562 66.523438 55.699219 66.523438 M 63.839844 66.214844 C 65.492188 66.214844 66.605469 67.328125 66.605469 69.746094 C 66.605469 70.515625 66.566406 71.285156 66.488281 71.859375 L 61.382812 71.859375 C 61.34375 71.359375 61.34375 70.59375 61.34375 70.171875 C 61.34375 67.671875 62.074219 66.214844 63.839844 66.214844 M 62.34375 39.34375 L 50.089844 39.34375 L 50.089844 44.222656 L 61.726562 44.222656 C 64.605469 44.222656 66.296875 45.414062 66.296875 48.445312 C 66.296875 51.25 64.992188 52.710938 61.917969 52.710938 L 50.089844 52.710938 L 50.089844 57.664062 L 63.03125 57.664062 C 67.566406 57.664062 70.40625 54.785156 70.40625 48.714844 C 70.40625 42.148438 66.796875 39.34375 62.34375 39.34375 M 70.0625 19.101562 L 63.609375 23.519531 C 62.765625 24.097656 61.957031 24.632812 61.417969 25.019531 C 60.726562 22.136719 58.808594 20.179688 55.734375 20.179688 C 51.855469 20.179688 49.972656 23.097656 49.972656 28.015625 C 49.972656 30.550781 50.011719 33.582031 50.089844 35.195312 L 70.0625 35.195312 L 70.0625 30.242188 L 62.265625 30.242188 L 62.265625 30.050781 L 70.0625 25.132812 Z M 56.234375 25.441406 C 57.886719 25.441406 59 26.671875 59 28.589844 C 59 29.128906 59 29.742188 58.921875 30.242188 L 53.816406 30.242188 C 53.777344 29.78125 53.738281 29.28125 53.738281 28.742188 C 53.738281 26.707031 54.660156 25.441406 56.234375 25.441406 M 68.949219 0.390625 L 59.421875 0.390625 L 59.421875 5.347656 L 65.683594 5.347656 C 65.914062 6.035156 66.03125 6.882812 66.03125 7.726562 C 66.03125 10.992188 63.917969 13.21875 60.078125 13.21875 C 56.117188 13.21875 53.890625 10.644531 53.890625 7.152344 C 53.890625 5.230469 54.277344 3.464844 55.007812 1.695312 L 50.742188 0.773438 C 50.050781 2.925781 49.742188 5.113281 49.742188 7.265625 C 49.742188 14.332031 54.507812 18.480469 60.460938 18.480469 C 67.066406 18.480469 70.40625 14.0625 70.40625 8.148438 C 70.40625 5.308594 69.867188 2.773438 68.949219 0.390625 " style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;"></path>
+</g>
+<path d="M 37.316406 117.558594 L 24.984375 117.558594 L 24.984375 122.46875 L 36.699219 122.46875 C 39.597656 122.46875 41.296875 123.667969 41.296875 126.722656 C 41.296875 129.542969 39.984375 131.011719 36.890625 131.011719 L 24.984375 131.011719 L 24.984375 136 L 38.011719 136 C 42.574219 136 45.433594 133.101562 45.433594 126.992188 C 45.433594 120.382812 41.800781 117.558594 37.316406 117.558594 M 45.085938 92.566406 L 24.984375 92.566406 L 24.984375 97.398438 L 33.449219 97.359375 C 35.539062 97.359375 37.199219 97.320312 38.398438 97.242188 L 38.398438 97.28125 C 37.042969 97.898438 35.769531 98.59375 34.570312 99.367188 L 24.984375 105.207031 L 24.984375 111.890625 L 45.085938 111.890625 L 45.085938 107.097656 L 35.152344 107.097656 C 33.566406 107.097656 32.5625 107.136719 31.59375 107.214844 L 31.59375 107.175781 C 32.714844 106.671875 34.144531 105.976562 35.265625 105.28125 L 45.085938 99.253906 Z M 45.09375 81 L 25.007812 81 L 25 86.171875 L 45.09375 86.171875 L 45.09375 81 " style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;"></path>
+<g clip-path="url(#clip2)" clip-rule="nonzero">
+<path d="M 75.023438 86.167969 L 95.148438 86.167969 L 95.148438 80.996094 L 75.023438 80.996094 Z M 75.023438 86.167969 " style=" stroke:none;fill-rule:nonzero;fill:rgb(76.991272%,7.034302%,17.796326%);fill-opacity:1;"></path>
+</g>
+<path d="M 0 86.167969 L 20.105469 86.167969 L 20.105469 81.003906 L 0 81.003906 Z M 0 86.167969 " style=" stroke:none;fill-rule:nonzero;fill:rgb(76.991272%,7.034302%,17.796326%);fill-opacity:1;"></path>
+</g>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt", "select.version.title": "Version ausw\u00e4hlen"}, "search": "assets/javascripts/workers/search.5e67fbfe.min.js"}</script>
+<script src="assets/javascripts/bundle.e87a5f81.min.js"></script>
+</body>
+</html>
