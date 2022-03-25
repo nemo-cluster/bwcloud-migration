@@ -9,6 +9,7 @@ A service of the bwForCluster NEMO.
 ## Community Migration Guide
 
 This guide is only for users of the University of Freiburg who have bwCloud images in the old Freiburg region and want to migrate them to the new bwCloud.
+If you want to contribute, fork the repository and create a pull request with your changes.
 
 ### First Configuration Steps
 
